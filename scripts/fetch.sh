@@ -10,7 +10,7 @@ main_work() {
     cd ${tmp_dir}
 
     # Fetch the firmware
-    wget "$url" -O "AP.zip"
+    wget -q "$url" -O "AP.zip"
 
     # Unpack the firmware
     unzip "AP.zip"
