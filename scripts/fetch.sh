@@ -3,7 +3,7 @@ set -euo pipefail
 
 main_work() {
     local url="$1"
-    local tmp_dir="/tmp/action_sw"
+    local tmp_dir="$(pwd)/tmp"
 
     # Create output directory
     mkdir -p ./out
