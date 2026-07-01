@@ -5,6 +5,9 @@ main_work() {
     local url="$1"
     local tmp_dir="/tmp/action_sw"
 
+    # Create output directory
+    mkdir -p ./out
+
     # Create temp dir
     mkdir -p ${tmp_dir}
     cd ${tmp_dir}
