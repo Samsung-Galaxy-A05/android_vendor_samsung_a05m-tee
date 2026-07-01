@@ -1,0 +1,24 @@
+# SM-A055F - A055FXXSFDZD1
+on early-fs && property:ro.boot.em.model=SM-A055F && property:ro.boot.bootloader=A055FXXSFDZD1
+    # TEEgris
+    mount none /vendor/tee/SM-A055F/TEE_F /vendor/tee bind
+
+# SM-A055F - A055FXXSGDZE1	
+on early-fs && property:ro.boot.em.model=SM-A055F && property:ro.boot.bootloader=A055FXXSGDZE1
+    # TEEgris
+    mount none /vendor/tee/SM-A055F/TEE_G /vendor/tee bind
+
+# SM-A055F - A055FXXSHDZF1
+on early-fs && property:ro.boot.em.model=SM-A055F && property:ro.boot.bootloader=A055FXXSHDZF1
+    # TEEgris
+    mount none /vendor/tee/SM-A055F/TEE_H /vendor/tee bind
+
+# SM-A055M - A055MUBSHDZD1
+on early-fs && property:ro.boot.em.model=SM-A055M && property:ro.boot.bootloader=A055MUBSHDZD1
+    # TEEgris
+    mount none /vendor/tee/SM-A055M/TEE_H /vendor/tee bind
+
+# SM-A055M - A055MUBSIDZE1
+on early-fs && property:ro.boot.em.model=SM-A055M && property:ro.boot.bootloader=A055MUBSIDZE1
+    # TEEgris
+    mount none /vendor/tee/SM-A055M/TEE_H /vendor/tee bind

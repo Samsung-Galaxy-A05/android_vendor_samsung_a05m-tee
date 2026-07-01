@@ -1,0 +1,42 @@
+name: Update TEE drivers
+on:
+  workflow_dispatch:
+    inputs:
+      direct_url:
+        description: 'Direct URL to the file'
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+        image: fedora:latest
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        path: rootdir
+    
+    - name: Fetch TEE drivers
+      run: bash scripts/fetch.sh "${{ inputs.direct_url }}"
+      working-directory: rootdir
+
+    - name: Update directory
+      run: python3 scripts/gen.py
+      working-directory: rootdir
+
+    - uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "a05m-tee: Update TEE drivers"
+        committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+        author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+        branch: "master" # The branch where changes will be pushed
+        title: "a05m-tee: Update TEE drivers"
+        body: |
+          TEE driver update
+        labels: automated-pr
