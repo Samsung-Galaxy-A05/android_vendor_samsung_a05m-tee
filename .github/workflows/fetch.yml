@@ -12,22 +12,28 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: fedora:latest # Fixed indentation here
+    runs-on: ubuntu-26.04
 
     steps:
     - uses: actions/checkout@v4 # Reverted to v4 unless you have a custom/future internal v6 setup
-    
-    # Fedora containers are barebones; we must install git, bash, and python3 first
-    - name: Install dependencies
-      run: dnf install -y git bash python3
 
     - name: Configure Git Safe Directory
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
+    - name: Fetch system dependencies
+      continue-on-error: false
+      run: |
+        sudo apt update -y
+        sudo apt install -y unzip lz4 simg2img wget erofs-utils python3-pip python3 lpunpack
+
     - name: Check storage status
       run: df -h
+
+    - name: Check current directory
+      run: ls -laZ
+
+    - name: Copy tools into bin
+      run: cd ${{ github.workspace }}/tools && chmod +x * && sudo cp -r * /usr/local/bin/
 
     - name: Fetch TEE drivers
       run: bash scripts/fetch.sh "${{ github.event.inputs.direct_url }}"

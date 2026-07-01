@@ -1,11 +1,6 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
-get_deps() {
-    sudo dnf update -y
-    sudo dnf install -y unzip lz4 simg2img wget erofs-utils python3-pip python3 lpunpack
-}
-
 main_work() {
     local url="$1"
     local tmp_dir="/tmp/action_sw"
@@ -37,5 +32,4 @@ main_work() {
     cd out; fsck.erofs --extract=vendor/ vendor.img; rm *.img; cd -
 }
 
-get_deps;
 main_work "$1"
