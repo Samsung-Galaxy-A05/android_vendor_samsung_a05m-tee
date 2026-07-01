@@ -14,29 +14,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-        image: fedora:latest
+      image: fedora:latest # Fixed indentation here
 
     steps:
-    - uses: actions/checkout@v6
-      with:
-        path: rootdir
+    - uses: actions/checkout@v4 # Reverted to v4 unless you have a custom/future internal v6 setup
     
+    # Fedora containers are barebones; we must install git, bash, and python3 first
+    - name: Install dependencies
+      run: dnf install -y git bash python3
+
+    - name: Configure Git Safe Directory
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
     - name: Fetch TEE drivers
-      run: bash scripts/fetch.sh "${{ inputs.direct_url }}"
-      working-directory: rootdir
+      run: bash scripts/fetch.sh "${{ github.event.inputs.direct_url }}"
+      working-directory: ${{ github.workspace }}
 
     - name: Update directory
       run: python3 scripts/gen.py
-      working-directory: rootdir
+      working-directory: ${{ github.workspace }}
 
-    - uses: peter-evans/create-pull-request@v6
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: "a05m-tee: Update TEE drivers"
         committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
         author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-        branch: "main" # The branch where changes will be pushed
+        branch: "update-tee-drivers" # DO NOT target "main" here. This is the new HEAD branch for the PR.
+        base: "main" # The branch you want to merge into
         title: "a05m-tee: Update TEE drivers"
         body: |
-          TEE driver update
+          Automated TEE driver update via workflow dispatch.
         labels: automated-pr
