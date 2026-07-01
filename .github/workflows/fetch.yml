@@ -26,6 +26,9 @@ jobs:
     - name: Configure Git Safe Directory
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
+    - name: Check storage status
+      run: df -h
+
     - name: Fetch TEE drivers
       run: bash scripts/fetch.sh "${{ github.event.inputs.direct_url }}"
       working-directory: ${{ github.workspace }}
