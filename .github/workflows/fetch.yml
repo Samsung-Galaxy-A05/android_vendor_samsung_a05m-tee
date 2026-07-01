@@ -24,7 +24,7 @@ jobs:
       continue-on-error: false
       run: |
         sudo apt update -y
-        sudo apt install -y unzip lz4 simg2img wget erofs-utils python3-pip python3 lpunpack
+        sudo apt install -y unzip lz4 android-sdk-libsparse-utils wget erofs-utils python3-pip python3
 
     - name: Check storage status
       run: df -h
