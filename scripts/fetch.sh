@@ -46,7 +46,7 @@ main_work() {
     cd ${out_dir}
     rm -rf ${tmp_dir}
 
-    fsck.erofs --extract=vendor/ vendor.img; rm *.img; cd -
+    fsck.erofs --extract=vendor/ vendor.img; rm *.img
 }
 
 main_work $1 $2
