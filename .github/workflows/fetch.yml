@@ -2,8 +2,13 @@ name: Update TEE drivers
 on:
   workflow_dispatch:
     inputs:
-      direct_url:
-        description: 'Direct URL to the file'
+      model:
+        description: 'Model'
+        default: 'SM-A055F'
+        required: true
+      region:
+        description: 'Region'
+        default: 'XID'
         required: true
 
 permissions:
@@ -36,7 +41,7 @@ jobs:
       run: cd ${{ github.workspace }}/tools && chmod +x * && sudo cp -r * /usr/local/bin/
 
     - name: Fetch TEE drivers
-      run: bash scripts/fetch.sh "${{ github.event.inputs.direct_url }}"
+      run: bash scripts/fetch.sh "${{ github.event.inputs.model }}" "${{ github.event.inputs.region }}"
       working-directory: ${{ github.workspace }}
 
     - name: Update directory
