@@ -28,8 +28,8 @@ main_work() {
     samloader ${model} ${region}
 
     # Unpack the firmware
-    unzip ${region}*.zip
-    rm -f BL* *CSC* CP* # delete everything except AP. 
+    unzip ${model}*.zip
+    rm -f BL* CSC* HOME_* CP* # delete everything except AP. 
     tar -xvf *.tar.md5
     lz4 -d super.img.lz4
 
