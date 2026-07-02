@@ -1,0 +1,5 @@
+# TEE drivers for SM-A055F / SM-A055M
+
+Credits:
+- [Fede2782](https://github.com/UN1CA/target_a34x_patches_tee) - For A34 5G TEE patches
+- [Smiley9000](https://github.com/smiley9000) - For A05 AOSP bringup
