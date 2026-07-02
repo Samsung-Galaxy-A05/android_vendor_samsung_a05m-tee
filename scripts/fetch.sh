@@ -16,12 +16,13 @@ main_work() {
     local model="$1"
     local region="$2"
     local tmp_dir="$(pwd)/tmp"
+    local out_dir="$(pwd)/out"
 
     # Create output directory
-    mkdir -p ./out
+    mkdir ${out_dir}
 
     # Create temp dir
-    mkdir -p ${tmp_dir}
+    mkdir ${tmp_dir}
     cd ${tmp_dir}
 
     # Fetch the firmware
@@ -41,11 +42,11 @@ main_work() {
 
     # Cleanup and copy
     rm *.raw *.lz4 *.tar.md5 *.zip super.img
-    cd -
-    mv ${tmp_dir}/vendor.img ./out
+    mv ${tmp_dir}/vendor.img ${out_dir}
+    cd ${out_dir}
     rm -rf ${tmp_dir}
 
-    cd out; fsck.erofs --extract=vendor/ vendor.img; rm *.img; cd -
+    cd ${out_dir}; fsck.erofs --extract=vendor/ vendor.img; rm *.img; cd -
 }
 
 main_work $1 $2
