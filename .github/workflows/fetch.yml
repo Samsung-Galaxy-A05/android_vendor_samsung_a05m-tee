@@ -45,7 +45,7 @@ jobs:
       working-directory: ${{ github.workspace }}
 
     - name: Update directory
-      run: python3 scripts/gen.py
+      run: bash scripts/gen.sh
       working-directory: ${{ github.workspace }}
 
     - name: Create Pull Request
