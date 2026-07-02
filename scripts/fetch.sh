@@ -30,14 +30,14 @@ main_work() {
     # Unpack the firmware
     unzip ${model}*.zip
     rm -f BL* CSC* HOME_* CP* # delete everything except AP. 
-    tar -xvf *.tar.md5
+    tar -xvf *.tar.md5 super.img.lz4
     lz4 -d super.img.lz4
 
     # Convert sparse image to raw image
     simg2img super.img super.img.raw
 
     # Unpack the super image
-    lpunpack --partition=vendor super.img
+    lpunpack --partition=vendor super.img.raw
 
     # Cleanup and copy
     rm *.raw *.lz4 *.tar.md5 *.zip super.img
