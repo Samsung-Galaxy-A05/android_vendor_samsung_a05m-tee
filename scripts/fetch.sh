@@ -47,6 +47,8 @@ main_work() {
     rm -rf ${tmp_dir}
 
     fsck.erofs --extract=vendor/ vendor.img; rm *.img
+    echo "Current dir: $(pwd)"
+    ls -laZ
 }
 
 main_work $1 $2
