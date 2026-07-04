@@ -56,6 +56,7 @@ update_rc_file() {
     local rc_entry="
 # ${model} - ${bootloader}
 on early-fs && property:ro.boot.em.model=${model} && property:ro.boot.bootloader=${bootloader}
+    # TEEgris
     mount none ${source_dir} /vendor/tee bind
 "
 
