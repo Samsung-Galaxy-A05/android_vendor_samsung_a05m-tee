@@ -38,3 +38,9 @@ on early-fs && property:ro.boot.em.model=SM-A055F && property:ro.boot.bootloader
     # TEEgris
     mount none /vendor/tee/SM-A055F/TEE_J /vendor/tee bind
 
+
+# SM-A055M - A055MUBSKDZI3
+on early-fs && property:ro.boot.em.model=SM-A055M && property:ro.boot.bootloader=A055MUBSKDZI3
+    # TEEgris
+    mount none /vendor/tee/SM-A055M/TEE_K /vendor/tee bind
+
